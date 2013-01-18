@@ -4,13 +4,13 @@ require File.expand_path(File.dirname(__FILE__)) + "/kabill"
 
 
 class TestCashier < Test::Unit::TestCase
-  BILL_AMOUNT = 990
-  EMPLOYEE_DISCOUNT = 297
-  AFFILIATE_DISCOUNT = 99
-  LOYALTY_DISCOUNT = 49.5
+  BILL_AMOUNT                = 990
+  EMPLOYEE_DISCOUNT          = 297
+  AFFILIATE_DISCOUNT         = 99
+  LOYALTY_DISCOUNT           = 49.5
   SURE_SHOT_DISCOUNTED_PRICE = BILL_AMOUNT - 45 
   
-  def test_normal_user_discount
+  def test_normal_customer_discount
     user = User.new
     assert_equal(SURE_SHOT_DISCOUNTED_PRICE, Cashier.discount(user, BILL_AMOUNT))
   end
@@ -35,6 +35,7 @@ class TestCashier < Test::Unit::TestCase
     user = User.new
     assert_equal(990.5 - 45, Cashier.discount(user, 990.5))
   end
+
 end
 
 class TestUser < Test::Unit::TestCase
@@ -56,5 +57,11 @@ class TestAffiliate < Test::Unit::TestCase
     loyal_user = User.new
     loyal_user.since = DateTime.now << 24
     assert_equal(5,loyal_user.percent_discount)
+  end
+end
+class TC_GroceryItem < Test::Unit::TestCase
+  def test_grocery_item_should_not_be_discounted
+    item = GroceryItem.new(98)
+    assert_equal(false, item.discounted?)
   end
 end

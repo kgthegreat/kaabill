@@ -51,3 +51,20 @@ class Affiliate < User
     10
   end
 end
+
+class Item
+  attr_accessor :price
+  def initialize(price)
+    @price = price
+  end
+  def discounted?
+    true
+  end
+end
+
+class GroceryItem < Item
+  def discounted?
+    false
+  end
+end
+
