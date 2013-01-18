@@ -25,29 +25,24 @@ Purchase - groceries
 
 class Cashier
   def self.discount(user, bill_amount)
-    if user.is_a? Employee
-      return discounted_amount_for_employee(bill_amount)
-    elsif user.is_a? Affiliate
-      return discounted_amount_for_affiliate(bill_amount)
-    end
-    bill_amount
-  end
-
-
-  private
-  def self.discounted_amount_for_employee(bill_amount)
-    bill_amount - bill_amount * 30/100
-  end
-  def self.discounted_amount_for_affiliate(bill_amount)
-    bill_amount - bill_amount * 10/100
+    bill_amount - bill_amount * user.percent_discount/100
   end
 end
 
 class User
+  def percent_discount
+    0
+  end
 end
 
 class Employee < User
+  def percent_discount
+    30
+  end
 end
 
 class Affiliate < User
+  def percent_discount
+    10
+  end
 end
