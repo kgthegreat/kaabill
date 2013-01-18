@@ -10,38 +10,37 @@ class TestCashier < Test::Unit::TestCase
   LOYALTY_DISCOUNT           = 49.5
   SURE_SHOT_DISCOUNTED_PRICE = BILL_AMOUNT - 45 
 
+  def setup
+    @wallet = Item.new(500)
+    @chair = Item.new(490)
+    @pen = Item.new(35)
+    @notebook = Item.new(25)
+    @rice = GroceryItem.new(550)
+    @wheat = GroceryItem.new(750)
+    @cornflakes = GroceryItem.new(800)
+  end
+  
   def test_cashier_correctly_bills_a_customer_with_no_groceries
     user = User.new
-    wallet = Item.new(500)
-    chair = Item.new(490)
-    items = [wallet, chair]
+    items = [@wallet, @chair]
     assert_equal(990 - 45, Cashier.prepare_bill(user, items))
   end
 
   def test_cashier_correctly_bills_a_customer_with_some_groceries
     user = User.new
-    pen = Item.new(35)
-    notebook = Item.new(25)
-    rice = GroceryItem.new(550)
-    items = [pen, notebook, rice]
+    items = [@pen, @notebook, @rice]
     assert_equal( 25 + 35 + 550, Cashier.prepare_bill(user, items))
   end
 
   def test_cashier_correctly_bills_a_customer_with_only_groceries
     user = User.new
-    rice = GroceryItem.new(550)
-    wheat = GroceryItem.new(750)
-    cornflakes = GroceryItem.new(800)
-    items = [rice, wheat, cornflakes]
+    items = [@rice, @wheat, @cornflakes]
     assert_equal( 550 + 750 + 800, Cashier.prepare_bill(user, items))
   end
   
   def test_cashier_correctly_bills_an_employee_with_some_groceries
     employee = Employee.new
-    wallet = Item.new(500)
-    chair = Item.new(490)
-    rice = GroceryItem.new(550)
-    items = [wallet, chair, rice]
+    items = [@wallet, @chair, @rice]
     assert_equal( SURE_SHOT_DISCOUNTED_PRICE - EMPLOYEE_DISCOUNT + 550, Cashier.prepare_bill(employee, items))
   end
 
@@ -70,9 +69,6 @@ class TestCashier < Test::Unit::TestCase
     user = User.new
     assert_equal(990.5 - 45, Cashier.apply_discount(user, 990.5))
   end
-
-
-  
 end
 
 class TestUser < Test::Unit::TestCase
