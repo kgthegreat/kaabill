@@ -22,7 +22,7 @@ Purchase - groceries
 
 =end
 
-
+require "date"
 class Cashier
   def self.discount(user, bill_amount)
     bill_amount - bill_amount * user.percent_discount/100
@@ -30,8 +30,13 @@ class Cashier
 end
 
 class User
+  attr_accessor :since
   def percent_discount
-    0
+    if @since && @since <= DateTime.now << 24
+      5
+    else
+      0
+    end
   end
 end
 
