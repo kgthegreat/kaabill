@@ -1,8 +1,8 @@
 require "test/unit"
-require File.expand_path(File.dirname(__FILE__)) + "/discounter"
+require File.expand_path(File.dirname(__FILE__)) + "/kabill"
 
 
-class TestDiscounter < Test::Unit::TestCase
+class TestKabill < Test::Unit::TestCase
   def test_cashier_returns_discounted_amount_as_total_bill_if_user_does_not_qualify_for_discount
     user = User.new
     assert_equal(1000, Cashier.discount(user, 1000))
