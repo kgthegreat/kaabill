@@ -1,6 +1,6 @@
 require "test/unit"
 require "date"
-require File.expand_path(File.dirname(__FILE__)) + "/kabill"
+require File.expand_path(File.dirname(__FILE__)) + "/../lib/cashier"
 
 
 class TestCashier < Test::Unit::TestCase
@@ -68,33 +68,5 @@ class TestCashier < Test::Unit::TestCase
   def test_sureshot_discount_with_a_float
     user = User.new
     assert_equal(990.5 - 45, Cashier.apply_discount(user, 990.5))
-  end
-end
-
-class TestUser < Test::Unit::TestCase
-  def test_percent_discount
-    assert_equal(0,User.new.percent_discount)
-  end
-end
-class TestEmployee < Test::Unit::TestCase
-  def test_percent_discount
-    assert_equal(30,Employee.new.percent_discount)
-  end
-end
-class TestAffiliate < Test::Unit::TestCase
-  def test_percent_discount
-    assert_equal(10,Affiliate.new.percent_discount)
-  end
-
-  def test_loyal_percent_discount
-    loyal_user = User.new
-    loyal_user.since = DateTime.now << 24
-    assert_equal(5,loyal_user.percent_discount)
-  end
-end
-class TC_GroceryItem < Test::Unit::TestCase
-  def test_grocery_item_should_not_be_discounted
-    item = GroceryItem.new(98)
-    assert_equal(false, item.discounted?)
   end
 end
