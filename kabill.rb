@@ -25,7 +25,7 @@ Purchase - groceries
 require "date"
 class Cashier
   def self.discount(user, bill_amount)
-    bill_amount - bill_amount * user.percent_discount/100
+    bill_amount - bill_amount * user.percent_discount/100.0 - bill_amount.truncate/100 * 5
   end
 end
 

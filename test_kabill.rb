@@ -4,33 +4,37 @@ require File.expand_path(File.dirname(__FILE__)) + "/kabill"
 
 
 class TestCashier < Test::Unit::TestCase
+  BILL_AMOUNT = 990
+  EMPLOYEE_DISCOUNT = 297
+  AFFILIATE_DISCOUNT = 99
+  LOYALTY_DISCOUNT = 49.5
+  SURE_SHOT_DISCOUNTED_PRICE = BILL_AMOUNT - 45 
+  
   def test_normal_user_discount
     user = User.new
-    assert_equal(1000, Cashier.discount(user, 1000))
+    assert_equal(SURE_SHOT_DISCOUNTED_PRICE, Cashier.discount(user, BILL_AMOUNT))
   end
 
   def test_employee_discount
     employee = Employee.new
-    bill_amount = 1000
-    expected_discounted_amount = 1000 - 1000 * 30/100
-    assert_equal(expected_discounted_amount, Cashier.discount(employee, bill_amount))
+    assert_equal(SURE_SHOT_DISCOUNTED_PRICE - EMPLOYEE_DISCOUNT , Cashier.discount(employee, BILL_AMOUNT))
   end
 
   def test_affiliate_discount
     affiliate = Affiliate.new
-    bill_amount = 1000
-    expected_discounted_amount = 1000 - 1000 * 10/100
-    assert_equal(expected_discounted_amount, Cashier.discount(affiliate, bill_amount))
+    assert_equal(SURE_SHOT_DISCOUNTED_PRICE - AFFILIATE_DISCOUNT, Cashier.discount(affiliate, BILL_AMOUNT))
   end
 
   def test_loyal_customer_discount
     loyal_user = User.new
     loyal_user.since = DateTime.now << 24
-    bill_amount = 1000
-    expected_discounted_amount = 1000 - 1000 * 5/100
-    assert_equal(expected_discounted_amount, Cashier.discount(loyal_user, bill_amount))
+    assert_equal(SURE_SHOT_DISCOUNTED_PRICE - LOYALTY_DISCOUNT, Cashier.discount(loyal_user, BILL_AMOUNT))
   end
 
+  def test_sureshot_discount_with_a_float
+    user = User.new
+    assert_equal(990.5 - 45, Cashier.discount(user, 990.5))
+  end
 end
 
 class TestUser < Test::Unit::TestCase
