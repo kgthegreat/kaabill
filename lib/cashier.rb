@@ -14,7 +14,7 @@ class Cashier
     net_amount_payable = apply_discount(user, total_to_be_discounted) + total_to_be_not_discounted
   end
   
-  def self.apply_discount(user, bill_amount)
-    bill_amount - bill_amount * user.percent_discount/100.0 - bill_amount.truncate/100 * 5
+  def self.apply_discount(user, amount)
+    amount - amount * user.percent_discount/100.0 - amount.truncate/100 * 5
   end
 end

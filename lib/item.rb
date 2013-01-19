@@ -1,6 +1,8 @@
 class Item
   attr_accessor :price
-  def initialize(price)
+  attr_accessor :name
+  def initialize(name, price)
+    @name = name
     @price = price
   end
   def discounted?

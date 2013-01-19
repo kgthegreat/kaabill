@@ -11,13 +11,13 @@ class TestCashier < Test::Unit::TestCase
   SURE_SHOT_DISCOUNTED_PRICE = BILL_AMOUNT - 45 
 
   def setup
-    @wallet = Item.new(500)
-    @chair = Item.new(490)
-    @pen = Item.new(35)
-    @notebook = Item.new(25)
-    @rice = GroceryItem.new(550)
-    @wheat = GroceryItem.new(750)
-    @cornflakes = GroceryItem.new(800)
+    @wallet = Item.new("wallet", 500)
+    @chair = Item.new("chair", 490)
+    @pen = Item.new("pen", 35)
+    @notebook = Item.new("notebook", 25)
+    @rice = GroceryItem.new("rice", 550)
+    @wheat = GroceryItem.new("wheat", 750)
+    @cornflakes = GroceryItem.new("cornflakes", 800)
   end
   
   def test_cashier_correctly_bills_a_customer_with_no_groceries
