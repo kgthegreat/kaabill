@@ -1,3 +1,4 @@
+require 'date'
 Dir[File.dirname(__FILE__) + '/../lib/*.rb'].each { |file| require file }
 
 def terminal
@@ -11,12 +12,12 @@ end
 # Add or edit products here
 def build_inventory
   wallet = Item.new("wallet", 500)
-  chair = Item.new("chair", 490)
+  chair = Item.new("chair", 490.45)
   pen = Item.new("pen", 35)
   notebook = Item.new("notebook", 25)
   rice = GroceryItem.new("rice", 550)
-  wheat = GroceryItem.new("wheat", 750)
-  cornflakes = GroceryItem.new("cornflakes", 800)
+  wheat = GroceryItem.new("wheat", 750.99)
+  cornflakes = GroceryItem.new("cornflakes", 800.99)
   [wallet, chair, pen, notebook, rice, wheat, cornflakes]  
 end  
 
