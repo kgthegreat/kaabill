@@ -74,8 +74,11 @@ def warning_print(heading)
 end  
 
 def produce_bill(customer, items)
-  pretty_print "Total amount to be paid"
-  puts Cashier.prepare_bill(customer, items)
+  pretty_print "BILL"
+  pretty_print "Customer is a #{customer.class.name}"
+  items.each {|item| puts item.name}
+  pretty_print "Total amount payable"
+  pretty_print Cashier.prepare_bill(customer, items)
 end
 
 terminal

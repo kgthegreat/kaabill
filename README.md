@@ -3,7 +3,7 @@ kaaBILL a.k.a capaBILL
 
 Billing Solution
 
-How To
+HOW TO
 ======
 
 Run tests
@@ -14,6 +14,7 @@ Generate Code Coverage Report
 ----------------------------- 
 1. gem install simplecov
 2. Uncomment the top two lines at test/ts_kaabill.rb
+3. Run tests
 
 Launch Command Line Base Interface
 ----------------------------------

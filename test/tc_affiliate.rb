@@ -1,5 +1,6 @@
 require "test/unit"
 require File.expand_path(File.dirname(__FILE__)) + "/../lib/affiliate"
+require 'date'
 
 class TC_Affiliate < Test::Unit::TestCase
   def test_percent_discount

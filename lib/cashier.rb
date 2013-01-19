@@ -5,6 +5,7 @@ class Cashier
 
     net = percent_discount_applicable_amount + no_percent_discount_applicable_amount 
     net_payable = net - percent_based_discount(user, percent_discount_applicable_amount) - sureshot_discount(net)
+    net_payable.round(2)
   end
   
   def self.percent_based_discount(user, amount)
